@@ -1,26 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react'
+import Axios from 'axios';
 
-function App() {
+const api_key = "b06d26f077f7cb6c5417fe25767b033e";
+
+const App = () => {
+  useEffect(() => {
+    Axios.get(`https://api.themoviedb.org/3/movie/523?api_key=${api_key}`)
+      .then(res => console.log(res.data));
+  }, [])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <div className="wrapper"></div>
+  )
 }
 
-export default App;
+export default App
