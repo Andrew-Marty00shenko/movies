@@ -2,8 +2,10 @@ import React from 'react'
 import './About.scss'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import { connect } from 'react-redux';
 
-const About = () => {
+const About = (props) => {
     return (
         <div className="about">
             <div className="about-title">
@@ -11,7 +13,21 @@ const About = () => {
                 <p>Millions of movies, TV shows and people to discover. Explore now.</p>
             </div>
             <div className="about-search">
-                <TextField id="standard-basic" label="Search for a film" style={{ width: "100%" }} />
+                <Autocomplete
+                    freeSolo
+                    id="free-solo-2-demo"
+                    disableClearable
+                    options={props.movies.map((option) => option.title)}
+                    renderInput={(params) => (
+                        <TextField
+                            {...params}
+                            label="Search for a film..."
+                            margin="normal"
+                            variant="outlined"
+                            InputProps={{ ...params.InputProps, type: 'search' }}
+                        />
+                    )}
+                />
                 <Button variant="outlined" >
                     Search
                 </Button>
@@ -20,5 +36,11 @@ const About = () => {
     )
 }
 
+const mapStateToProps = (state) => {
+    return {
+        movies: state.movies.movies
+    }
+}
 
-export default About
+
+export default connect(mapStateToProps, null)(About)

@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 const MoviesList = (props) => {
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [moviesPerPage, setMoviesPerPage] = useState(5);
+    const [moviesPerPage] = useState(5);
 
     const indexOfLastMovie = currentPage * moviesPerPage;
     const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
@@ -57,7 +57,7 @@ const MoviesList = (props) => {
             <h2 style={{ marginLeft: "10px" }}>What's popular</h2>
             <div className="movies" style={{ marginLeft: "20px" }}>
                 {currentMovie.map(item => {
-                    return <Card key={item.id} className={classes.root}>
+                    return <Card key={item.id} style={{ cursor: "pointer" }} className={classes.root}>
                         <CardHeader
                             action={
                                 <IconButton aria-label="settings">
