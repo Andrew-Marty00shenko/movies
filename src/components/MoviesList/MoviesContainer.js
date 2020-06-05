@@ -1,11 +1,15 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { getMovies } from '../../redux/movies-reducer';
+import { getMovies, getMovie } from '../../redux/movies-reducer';
 import MoviesList from './MoviesList';
+import { withRouter } from 'react-router-dom';
+import { compose } from 'redux';
 
 const MoviesContainer = (props) => {
 
     useEffect(() => {
+        let movieId = props.match.params.movieId;
+        props.getMovie(movieId);
         props.getMovies();
     }, [])
 
@@ -14,8 +18,12 @@ const MoviesContainer = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        movies: state.movies.movies
+        movies: state.movies.movies,
+        movie: state.movies.movie
     }
 }
 
-export default connect(mapStateToProps, { getMovies })(MoviesContainer)
+export default compose(
+    connect(mapStateToProps, { getMovies, getMovie }),
+    withRouter
+)(MoviesContainer)

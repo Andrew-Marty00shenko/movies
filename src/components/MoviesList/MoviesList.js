@@ -10,6 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import Pagination from '../Pagitation/Pagination';
+import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -57,29 +58,31 @@ const MoviesList = (props) => {
             <h2 style={{ marginLeft: "10px" }}>What's popular</h2>
             <div className="movies" style={{ marginLeft: "20px" }}>
                 {currentMovie.map(item => {
-                    return <Card key={item.id} style={{ cursor: "pointer" }} className={classes.root}>
-                        <CardHeader
-                            action={
-                                <IconButton aria-label="settings">
+                    return <NavLink to={`/${item.id}`}>
+                        <Card key={item.id} style={{ cursor: "pointer" }} className={classes.root}>
+                            <CardHeader
+                                action={
+                                    <IconButton aria-label="settings">
 
-                                </IconButton>
-                            }
-                            title={item ? item.title : null}
-                            style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}
-                            subheader={item ? item.release_date : null}
-                        />
-                        <CardMedia
-                            className={classes.media}
-                            image={`https://image.tmdb.org/t/p/w220_and_h330_face/${item ? item.poster_path : null}`}
-                            title={item ? item.title : null}
-                        />
-                        <CardContent>
-                            <Typography variant="body2" color="textSecondary" component="p">
-                                <span style={{ color: "gold" }}>Оценка:</span>  {item ? item.vote_average : null}
-                            </Typography>
-                            <Button variant="contained" color="primary" style={{ fontSize: "13px" }} className={classes.btn}>Read more</Button>
-                        </CardContent>
-                    </Card>
+                                    </IconButton>
+                                }
+                                title={item ? item.title : null}
+                                style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}
+                                subheader={item ? item.release_date : null}
+                            />
+                            <CardMedia
+                                className={classes.media}
+                                image={`https://image.tmdb.org/t/p/w220_and_h330_face/${item ? item.poster_path : null}`}
+                                title={item ? item.title : null}
+                            />
+                            <CardContent>
+                                <Typography variant="body2" color="textSecondary" component="p">
+                                    <span style={{ color: "gold" }}>Оценка:</span>  {item ? item.vote_average : null}
+                                </Typography>
+                                <Button variant="contained" color="primary" style={{ fontSize: "13px" }} className={classes.btn}>Read more</Button>
+                            </CardContent>
+                        </Card>
+                    </NavLink>
                 })}
             </div>
             <Pagination moviesPerPage={moviesPerPage} totalMovies={props.movies.length} paginate={paginate} />
