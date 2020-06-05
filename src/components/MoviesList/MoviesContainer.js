@@ -19,7 +19,6 @@ const MoviesContainer = (props) => {
 const mapStateToProps = (state) => {
     return {
         movies: state.movies.movies,
-        movie: state.movies.movie
     }
 }
 

@@ -1,0 +1,33 @@
+.movie{
+    background: linear-gradient(to right, rgba(rgb(0, 64, 113), 0.8) 0%, rgba(rgb(0, 0, 121), 0) 100%);
+    padding: 0px 0px 0px 30px;
+    display: flex;
+}
+
+.movie-desc{
+    display: block;
+    font-family: 'Tenali Ramakrishna', sans-serif;
+    h1{
+        font-weight: bold;
+        line-height: 45px;
+    }
+    span{
+        color: #fff;
+        font-size: 40px;
+    }
+
+    .movie-genres li{
+        display: inline-flex
+    }
+}
+
+
+
+.movie-poster{
+    margin-right: 20px;
+
+    img{
+        width: 300px;
+        border-radius: 10px;
+    }
+}
