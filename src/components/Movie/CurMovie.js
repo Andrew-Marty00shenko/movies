@@ -1,9 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Movie.scss'
 import { connect } from 'react-redux'
+import Rating from '../Rating/Rating'
 import { getMovie } from '../../redux/movies-reducer'
+import { Button } from '@material-ui/core'
 
 const Movie = (props) => {
+
+    const [showBox, setShowBox] = useState(false);
 
     useEffect(() => {
         let movieId = props.match.params.movieId;
@@ -28,6 +32,11 @@ const Movie = (props) => {
                 <div className="movie-overview">
                     <h3 >Описание:</h3>
                     <p>{props.movie.overview}</p>
+                </div>
+                <div className="post-rait">
+                    <h3 >Хотите оценить фильм? </h3>
+                    <Button onClick={() => setShowBox(!showBox)} variant="contained" color="primary" style={{ width: "60px", height: "30px" }}>Да</Button>
+                    {showBox && <Rating />}
                 </div>
             </div>
         </div>
