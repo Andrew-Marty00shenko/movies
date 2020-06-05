@@ -21,7 +21,7 @@ const About = (props) => {
                     renderInput={(params) => (
                         <TextField
                             {...params}
-                            label="Search for a film..."
+                            label="Search for a film"
                             margin="normal"
                             variant="outlined"
                             InputProps={{ ...params.InputProps, type: 'search' }}

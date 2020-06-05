@@ -58,7 +58,7 @@ const MoviesList = (props) => {
             <h2 style={{ marginLeft: "10px" }}>What's popular</h2>
             <div className="movies" style={{ marginLeft: "20px" }}>
                 {currentMovie.map(item => {
-                    return <NavLink to={`/${item.id}`}>
+                    return <NavLink to={`movies/${item.id}`}>
                         <Card key={item.id} style={{ cursor: "pointer" }} className={classes.root}>
                             <CardHeader
                                 action={

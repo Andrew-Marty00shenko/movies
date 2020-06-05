@@ -11,7 +11,7 @@ const App = () => {
       <Header />
       <About />
       <Route exact path="/" render={() => <MoviesContainer />} />
-      <Route path="/:movieId?" render={(props) => <CurMovie {...props} />} />
+      <Route exact path="/movies/:movieId?" render={(props) => <CurMovie {...props} />} />
     </div>
   )
 }
