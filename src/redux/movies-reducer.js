@@ -25,8 +25,8 @@ export const setMovies = (movies) => ({ type: SET_MOVIES, movies })
 export const getMovies = () => dispatch => {
     Axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=ru`)
         .then(res => {
-            console.log(res.data);
-            dispatch(setMovies(res.data));
+            console.log(res.data.results);
+            dispatch(setMovies(res.data.results));
         })
 }
 
