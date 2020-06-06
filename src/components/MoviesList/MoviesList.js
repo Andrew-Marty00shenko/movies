@@ -6,7 +6,6 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button'
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import Pagination from '../Pagitation/Pagination';
@@ -61,11 +60,6 @@ const MoviesList = (props) => {
                     return <NavLink to={`movies/${item.id}`}>
                         <Card key={item.id} style={{ cursor: "pointer" }} className={classes.root}>
                             <CardHeader
-                                action={
-                                    <IconButton aria-label="settings">
-
-                                    </IconButton>
-                                }
                                 title={item ? item.title : null}
                                 style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}
                                 subheader={item ? item.release_date : null}

@@ -1,11 +1,10 @@
 import React from 'react'
 import './About.scss'
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { connect } from 'react-redux';
 
 const About = (props) => {
+
     return (
         <div className="about">
             <div className="about-title">
@@ -24,23 +23,12 @@ const About = (props) => {
                             label="Search for a film"
                             margin="normal"
                             variant="outlined"
-                            InputProps={{ ...params.InputProps, type: 'search' }}
                         />
                     )}
                 />
-                <Button variant="outlined" >
-                    Search
-                </Button>
             </div>
         </div>
     )
 }
 
-const mapStateToProps = (state) => {
-    return {
-        movies: state.movies.movies
-    }
-}
-
-
-export default connect(mapStateToProps, null)(About)
+export default About
