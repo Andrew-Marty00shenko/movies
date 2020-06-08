@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './MoviesList.scss'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -47,8 +47,8 @@ const MoviesList = ({ movies }) => {
             <h2 style={{ marginLeft: "10px" }}>What's popular</h2>
             <div className="movies" style={{ marginLeft: "20px" }}>
                 {movies.map(item => {
-                    return <NavLink to={`movies/${item.id}`}>
-                        <Card key={item.id} style={{ cursor: "pointer" }} className={classes.root}>
+                    return <NavLink to={`movies/${item.id}`} key={item.id}>
+                        <Card style={{ cursor: "pointer" }} className={classes.root}>
                             <CardHeader
                                 title={item ? item.title : null}
                                 style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}

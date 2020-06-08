@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 import './About.scss'
 import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import FiltredMovies from './FiltredMovies/FiltredMovies';
 
 
 
 const About = ({ movies }) => {
-    const [value, setValue] = useState(null);
 
+    const [value, setValue] = useState("");
 
     const searchFilm = movies.filter(data => {
         if (!value)
@@ -20,7 +19,7 @@ const About = ({ movies }) => {
 
     const filterRes = searchFilm.map(data => {
         return (
-            <div>
+            <div key={data.id}>
                 {value ?
                     <FiltredMovies data={data} />
                     : null
@@ -29,8 +28,6 @@ const About = ({ movies }) => {
         )
     })
 
-
-
     return (
         <div className="about">
             <div className="about-title">
@@ -38,23 +35,13 @@ const About = ({ movies }) => {
                 <p>Millions of movies, TV shows and people to discover. Explore now.</p>
             </div>
             <div className="about-search">
-                <Autocomplete
-                    freeSolo
-                    id="free-solo-2-demo"
-                    disableClearable
-                    options={movies.map((option) => option.title)}
-                    renderInput={(params) => (
-                        <TextField
-                            {...params}
-                            label="Search for a film"
-                            margin="normal"
-                            value={value}
-                            onChange={(e) => setValue(e.target.value)}
-                            variant="outlined"
-                        />
-                    )}
+                <TextField
+                    label="Search for a film"
+                    margin="normal"
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
+                    variant="outlined"
                 />
-
             </div>
             <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-around", flexWrap: "wrap" }}>
                 {filterRes}

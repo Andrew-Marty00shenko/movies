@@ -43,8 +43,8 @@ const FiltredMovies = ({ data }) => {
     return (
         <ul >
             <li >
-                <NavLink to={`movies/${data.id}`}>
-                    <Card key={data.id} style={{ cursor: "pointer" }} className={classes.root}>
+                <NavLink to={`movies/${data.id}`} >
+                    <Card style={{ cursor: "pointer" }} className={classes.root}>
                         <CardHeader
                             title={data ? data.title : null}
                             style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}
