@@ -1,36 +1,42 @@
 import React, { useEffect, useState } from 'react'
 import './Movie.scss'
-import { connect } from 'react-redux'
 import Rating from '../Rating/Rating'
-import { getMovie } from '../../redux/movies-reducer'
 import { Button } from '@material-ui/core'
+import Axios from 'axios'
+
+const api_key = "b06d26f077f7cb6c5417fe25767b033e";
 
 const Movie = (props) => {
-
+    debugger
     const [showBox, setShowBox] = useState(false);
+    const [currentMovie, setCurrentMovie] = useState({});
+
     useEffect(() => {
         let movieId = props.match.params.movieId;
-        props.getMovie(movieId);
-    })
+        Axios.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}&language=ru`)
+            .then(res => {
+                setCurrentMovie(res.data);
+            })
+    }, [])
 
     return (
         <div className="movie">
             <div className="movie-poster">
-                <img src={`https://image.tmdb.org/t/p/w220_and_h330_face/${props.movie ? props.movie.poster_path : null}`} alt="title" />
+                <img src={`https://image.tmdb.org/t/p/w220_and_h330_face/${currentMovie ? currentMovie.poster_path : null}`} alt="title" />
             </div>
             <div className="movie-desc">
-                <h1>{props.movie.title} <span>({props.movie.release_date})</span> </h1>
+                <h1>{currentMovie.title} <span>({currentMovie.release_date})</span> </h1>
                 <div className="movie-genres">
-                    <h3>Жанр:  -<span style={{ color: "#000", fontSize: "15px" }}>{props.movie.genres ? props.movie.genres.map(i => {
+                    <h3>Жанр:  -<span style={{ color: "#000", fontSize: "15px" }}>{currentMovie.genres ? currentMovie.genres.map(i => {
                         return <li key={i.id}>{i.name}-   </li>
                     }) : null}</span></h3>
                 </div>
                 <div className="movie-rait">
-                    <h3 >Рейтинг: <span style={{ color: "#000" }}> {props.movie.vote_average}</span></h3>
+                    <h3 >Рейтинг: <span style={{ color: "#000" }}> {currentMovie.vote_average}</span></h3>
                 </div>
                 <div className="movie-overview">
                     <h3 >Описание:</h3>
-                    <p>{props.movie.overview}</p>
+                    <p>{currentMovie.overview}</p>
                 </div>
                 <div className="post-rait">
                     <h3 >Хотите оценить фильм? </h3>
@@ -42,10 +48,4 @@ const Movie = (props) => {
     )
 }
 
-const mapStateToProps = (state) => {
-    return {
-        movie: state.movies.currentMovie
-    }
-}
-
-export default connect(mapStateToProps, { getMovie })(Movie)
+export default Movie

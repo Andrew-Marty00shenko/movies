@@ -1,17 +1,34 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from './components/Header/Header';
-import MoviesContainer from './components/MoviesList/MoviesContainer';
+import MoviesList from './components/MoviesList/MoviesList';
 import { Route } from 'react-router-dom';
-import CurMovie from './components/Movie/CurMovie'
-import AboutContainer from './components/About/AboutContainer';
+import Movie from '././components/Movie/Movie'
+import About from './components/About/About';
+import Axios from 'axios';
+import { setCountryCode } from './API/API';
+
+const api_key = "b06d26f077f7cb6c5417fe25767b033e";
 
 const App = () => {
+
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    setCountryCode().then(code => {
+      Axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&query=whiplash&language=${code.toLowerCase()}&region=${code}`)
+        .then(res => {
+          setMovies(res.data.results.slice(0, 5))
+          console.log(res.data)
+        })
+    })
+  }, [])
+
   return (
     <div className="app-wrapper">
       <Header />
-      <AboutContainer />
-      <Route exact path="/" render={() => <MoviesContainer />} />
-      <Route exact path="/movies/:movieId?" render={(props) => <CurMovie {...props} />} />
+      <About movies={movies} />
+      <Route exact path="/" render={() => <MoviesList movies={movies} />} />
+      <Route exact path="/movies/:movieId?" component={Movie} />
     </div>
   )
 }

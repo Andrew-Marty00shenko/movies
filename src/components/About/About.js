@@ -39,11 +39,11 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const About = (props) => {
+const About = ({ movies }) => {
     const [value, setValue] = useState(null);
     const classes = useStyles();
 
-    const searchFilm = props.movies.filter(data => {
+    const searchFilm = movies.filter(data => {
         if (value == null)
             return data
         else if (data.title.toLowerCase().includes(value.toLowerCase())) {
@@ -96,7 +96,7 @@ const About = (props) => {
                     freeSolo
                     id="free-solo-2-demo"
                     disableClearable
-                    options={props.movies.map((option) => option.title)}
+                    options={movies.map((option) => option.title)}
                     renderInput={(params) => (
                         <TextField
                             {...params}

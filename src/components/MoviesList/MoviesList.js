@@ -8,7 +8,6 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-import Pagination from '../Pagitation/Pagination';
 import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -39,16 +38,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const MoviesList = (props) => {
-
-    const [currentPage, setCurrentPage] = useState(1);
-    const [moviesPerPage] = useState(5);
-
-    const indexOfLastMovie = currentPage * moviesPerPage;
-    const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
-    const currentMovie = props.movies.slice(indexOfFirstMovie, indexOfLastMovie);
-
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+const MoviesList = ({ movies }) => {
 
     const classes = useStyles();
 
@@ -56,7 +46,7 @@ const MoviesList = (props) => {
         <>
             <h2 style={{ marginLeft: "10px" }}>What's popular</h2>
             <div className="movies" style={{ marginLeft: "20px" }}>
-                {currentMovie.map(item => {
+                {movies.map(item => {
                     return <NavLink to={`movies/${item.id}`}>
                         <Card key={item.id} style={{ cursor: "pointer" }} className={classes.root}>
                             <CardHeader
@@ -79,7 +69,6 @@ const MoviesList = (props) => {
                     </NavLink>
                 })}
             </div>
-            <Pagination moviesPerPage={moviesPerPage} totalMovies={props.movies.length} paginate={paginate} />
         </>
     );
 }
