@@ -7,7 +7,7 @@ import Axios from 'axios'
 const api_key = "b06d26f077f7cb6c5417fe25767b033e";
 
 const Movie = (props) => {
-    debugger
+
     const [showBox, setShowBox] = useState(false);
     const [currentMovie, setCurrentMovie] = useState({});
 
