@@ -11,7 +11,7 @@ const MoviesContainer = (props) => {
         let movieId = props.match.params.movieId;
         props.getMovie(movieId);
         props.getMovies();
-    }, [])
+    })
 
     return <MoviesList {...props} movies={props.movies} />
 }

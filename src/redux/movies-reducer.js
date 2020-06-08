@@ -43,6 +43,9 @@ export const getMovies = () => dispatch => {
         .then(res => {
             dispatch(setMovies(res.data.results));
         })
+        .catch(err => {
+            console.log(err)
+        })
 }
 
 export const getMovie = (movieId) => dispatch => {

@@ -8,7 +8,6 @@ import { Button } from '@material-ui/core'
 const Movie = (props) => {
 
     const [showBox, setShowBox] = useState(false);
-
     useEffect(() => {
         let movieId = props.match.params.movieId;
         props.getMovie(movieId);
