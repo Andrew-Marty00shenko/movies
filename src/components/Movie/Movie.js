@@ -4,20 +4,23 @@ import Rating from '../Rating/Rating'
 import { Button } from '@material-ui/core'
 import Axios from 'axios'
 
-const api_key = "b06d26f077f7cb6c5417fe25767b033e";
+// const api_key = "b06d26f077f7cb6c5417fe25767b033e";
 
-const Movie = (props) => {
+const Movie = ({ api_key, movieId }) => {
 
     const [showBox, setShowBox] = useState(false);
     const [currentMovie, setCurrentMovie] = useState({});
 
     useEffect(() => {
-        let movieId = props.match.params.movieId;
         Axios.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}&language=ru`)
             .then(res => {
                 setCurrentMovie(res.data);
             })
-    }, [])
+    }, []);
+
+    const popUp = () => {
+        setShowBox(!showBox);
+    }
 
     return (
         <div className="movie">
@@ -40,8 +43,8 @@ const Movie = (props) => {
                 </div>
                 <div className="post-rait">
                     <h3 >Хотите оценить фильм? </h3>
-                    <Button onClick={() => setShowBox(!showBox)} variant="contained" color="primary" style={{ width: "60px", height: "30px" }}>Да</Button>
-                    {showBox && <Rating />}
+                    <Button onClick={popUp} variant="contained" color="primary" style={{ width: "60px", height: "30px" }}>Да</Button>
+                    {showBox && <Rating movieId={movieId} api_key={api_key} />}
                 </div>
             </div>
         </div>

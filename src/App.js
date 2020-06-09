@@ -18,7 +18,6 @@ const App = () => {
       Axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&query=whiplash&language=${code.toLowerCase()}&region=${code}`)
         .then(res => {
           setMovies(res.data.results.slice(0, 5))
-          console.log(res.data)
         })
     })
   }, [])
@@ -28,7 +27,7 @@ const App = () => {
       <Header />
       <About movies={movies} />
       <Route exact path="/" render={() => <MoviesList movies={movies} />} />
-      <Route exact path="/movies/:movieId?" component={Movie} />
+      <Route exact path="/movies/:movieId?" render={(props) => <Movie movieId={props.match.params.movieId} api_key={api_key} />} />
     </div>
   )
 }
