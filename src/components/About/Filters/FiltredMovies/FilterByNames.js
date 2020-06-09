@@ -41,7 +41,7 @@ const FiltredMovies = ({ data }) => {
     const classes = useStyles();
 
     return (
-        <ul >
+        <ul style={{ marginLeft: "10px" }}>
             <li >
                 <NavLink to={`movies/${data.id}`} >
                     <Card style={{ cursor: "pointer" }} className={classes.root}>
