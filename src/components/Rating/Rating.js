@@ -24,7 +24,6 @@ export default function CustomizedRatings({ api_key, movieId }) {
                     'Content-Type': 'application/json;charset=utf-8'
                 }
             }).then(res => {
-
                 setLoad(false)
             })
         })
