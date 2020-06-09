@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './About.scss'
 import TextField from '@material-ui/core/TextField';
-import FiltredMovies from './FiltredMovies/FiltredMovies';
+import FilterByNames from './FiltredMovies/FilterByNames';
 import FilterByYear from './FiltredMovies/FilterByYear';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -52,7 +52,7 @@ const About = ({ movies }) => {
         return (
             <div key={data.id}>
                 {value ?
-                    <FiltredMovies data={data} />
+                    <FilterByNames data={data} />
                     : null
                 }
             </div>
@@ -91,8 +91,8 @@ const About = ({ movies }) => {
                     onChange={(e) => setValue(e.target.value)}
                     variant="outlined"
                 />
-                <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-around", flexWrap: "wrap" }}>
-                    <FormControl className={classes.formControl}>
+                <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", flexWrap: "wrap" }}>
+                    <FormControl className={classes.formControl} >
                         <InputLabel id="demo-controlled-open-select-label">Release date</InputLabel>
                         <Select
                             labelId="demo-controlled-open-select-label"
@@ -107,7 +107,7 @@ const About = ({ movies }) => {
                                 <em>None</em>
                             </MenuItem>
                             {movies.map(option => {
-                                return <MenuItem value={option.release_date}>{option.release_date}</MenuItem>
+                                return <MenuItem value={option.release_date.substr(0, 4)}>{option.release_date.substr(0, 4)}</MenuItem>
                             })}
                         </Select>
                     </FormControl>

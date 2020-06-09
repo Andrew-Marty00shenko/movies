@@ -52,7 +52,7 @@ const MoviesList = ({ movies }) => {
                             <CardHeader
                                 title={item ? item.title : null}
                                 style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}
-                                subheader={item ? item.release_date : null}
+                                subheader={item ? item.release_date.substr(0, 4) : null}
                             />
                             <CardMedia
                                 className={classes.media}

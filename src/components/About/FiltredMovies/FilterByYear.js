@@ -41,14 +41,14 @@ const FiltredMovies = ({ movie }) => {
     const classes = useStyles();
 
     return (
-        <ul >
+        <ul style={{ marginLeft: "10px" }}>
             <li >
                 <NavLink to={`movies/${movie.id}`} >
                     <Card style={{ cursor: "pointer" }} className={classes.root}>
                         <CardHeader
                             title={movie ? movie.title : null}
                             style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}
-                            subheader={movie ? movie.release_date : null}
+                            subheader={movie ? movie.release_date.substr(0, 4) : null}
                         />
                         <CardMedia
                             className={classes.media}

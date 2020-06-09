@@ -48,7 +48,7 @@ const FiltredMovies = ({ data }) => {
                         <CardHeader
                             title={data ? data.title : null}
                             style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}
-                            subheader={data ? data.release_date : null}
+                            subheader={data ? data.release_date.substr(0, 4) : null}
                         />
                         <CardMedia
                             className={classes.media}
