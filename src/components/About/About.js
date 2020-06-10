@@ -4,7 +4,7 @@ import FilterName from './Filters/FilterName';
 import FilterYear from './Filters/FilterYear';
 import FilterGenre from './Filters/FilterGenre';
 
-const About = ({ selectMovies, movies, genres, updateMovies }) => {
+const About = ({ selectMovies, moviesForFilt, genres, updateMovies }) => {
 
     return (
         <div className="about">
@@ -13,8 +13,8 @@ const About = ({ selectMovies, movies, genres, updateMovies }) => {
                 <p>Millions of movies, TV shows and people to discover. Explore now.</p>
             </div>
             <div className="about-search">
-                <FilterName movies={movies} />
-                <FilterYear movies={movies} />
+                <FilterName movies={moviesForFilt} />
+                <FilterYear movies={moviesForFilt} />
             </div>
             <FilterGenre selectMovies={selectMovies} genres={genres} updateMovies={updateMovies} />
         </div>

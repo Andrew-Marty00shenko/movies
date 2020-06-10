@@ -13,6 +13,7 @@ const App = () => {
 
   const [movies, setMovies] = useState([]);
   const [genres, setGenres] = useState([]);
+  const [moviesForFilt, setMoviesForFilt] = useState([]);
   const [selectMovies, setSelectMovies] = useState([]);
 
   useEffect(() => {
@@ -26,6 +27,10 @@ const App = () => {
       .then(res => {
         setGenres(res.data.genres);
       })
+    Axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&language=ru-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
+      .then(res => {
+        setMoviesForFilt(res.data.results);
+      })
   }, []);
 
   const updateMovies = (e) => {
@@ -35,10 +40,16 @@ const App = () => {
       setSelectMovies(newState);
     }
   }
+
+  // const get = () => {
+  //   Axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=12`)
+  //     .then(res => console.log(res.data))
+  // }
+
   return (
     <div className="app-wrapper">
       <Header />
-      <About selectMovies={selectMovies} movies={movies} genres={genres} updateMovies={updateMovies} />
+      <About selectMovies={selectMovies} moviesForFilt={moviesForFilt} genres={genres} updateMovies={updateMovies} />
       <Route exact path="/" render={() => <MoviesList movies={movies} />} />
       <Route exact path="/movies/:movieId?" render={(props) => <Movie movieId={props.match.params.movieId} api_key={api_key} />} />
     </div>

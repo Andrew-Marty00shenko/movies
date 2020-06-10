@@ -35,7 +35,7 @@ const FilterName = ({ movies }) => {
                 onChange={(e) => setValue(e.target.value)}
                 variant="outlined"
             /> <br />
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap" }}>
                 {filterResByNames}
             </div>
         </>

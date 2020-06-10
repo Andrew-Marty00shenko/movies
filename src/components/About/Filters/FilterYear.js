@@ -1,39 +1,24 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import FiltredMovies from '../../FiltredMovies/FilterByYear';
+import Grid from '@material-ui/core/Grid';
+import Slider from '@material-ui/core/Slider';
 
 const useStyles = makeStyles((theme) => ({
-    button: {
-        display: 'block',
-        marginTop: theme.spacing(2),
-    },
-    formControl: {
-        margin: theme.spacing(1),
-        minWidth: 120,
+    root: {
+        width: 100,
+        marginLeft: 20
     },
 }));
 
 const FilterYear = ({ movies }) => {
 
-    const [year, setYear] = useState("");
+    const [year, setYear] = useState(0);
     const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
 
-    const handleChange = useCallback(e =>
-        setYear(e.target.value), []
+    const handleChange = useCallback((event, newValue) =>
+        setYear(newValue), []
     );
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-
-    const handleOpen = () => {
-        setOpen(true);
-    };
 
     const searchFilmByDate = useMemo(() => {
         return movies.filter(movie => {
@@ -58,42 +43,22 @@ const FilterYear = ({ movies }) => {
 
     return (
         <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", flexWrap: "wrap" }}>
-            <FormControl className={classes.formControl} >
-                <InputLabel id="demo-controlled-open-select-label">Release date</InputLabel>
-                <Select
-                    labelId="demo-controlled-open-select-label"
-                    id="demo-controlled-open-select"
-                    open={open}
-                    onClose={handleClose}
-                    onOpen={handleOpen}
-                    value={year}
-                    onChange={handleChange}
-                >
-                    <MenuItem value="">
-                        <em>None</em>
-                    </MenuItem>
-                    <MenuItem value="2016">
-                        <em>2016</em>
-                    </MenuItem>
-                    <MenuItem value="2017">
-                        <em>2017</em>
-                    </MenuItem>
-                    <MenuItem value="2018">
-                        <em>2018</em>
-                    </MenuItem>
-                    <MenuItem value="2019">
-                        <em>2019</em>
-                    </MenuItem>
-                    <MenuItem value="2020">
-                        <em>2020</em>
-                    </MenuItem>
-                    {/* {movies.map(option => {
-                        return <MenuItem key={option.id} value={option.release_date.substr(0, 4)}>2019</MenuItem>
-                    })} */}
-                </Select>
-            </FormControl>
+            < div className={classes.root} >
+                <Grid item xs style={{ marginTop: 20 }}>
+                    Choose dates
+                    <Slider
+                        value={year}
+                        onChange={handleChange}
+                        min={2015}
+                        max={2020}
+                        aria-labelledby="discrete-slider"
+                        valueLabelDisplay="auto"
+                        step={1}
+                    />
+                </Grid>
+            </ div>
             {filterResByYear}
-        </div>
+        </div >
     )
 }
 
