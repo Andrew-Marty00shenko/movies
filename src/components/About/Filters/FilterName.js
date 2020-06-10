@@ -1,18 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import TextField from '@material-ui/core/TextField';
-import FiltredMovies from './FiltredMovies/FilterByNames';
+import FiltredMovies from '../../FiltredMovies/FilterByNames';
 
 
 const FilterName = ({ movies }) => {
     const [value, setValue] = useState("");
 
-    const searchFilmByName = movies.filter(data => {
-        if (!value)
-            return data
-        else if (data.title.toLowerCase().includes(value.toLowerCase())) {
-            return data
-        }
-    });
+    const searchFilmByName = useMemo(() => {
+        return movies.filter(data => {
+            if (!value) return data;
+            else if (data.title.toLowerCase().includes(value.toLowerCase())) {
+                return data;
+            }
+        })
+    }, [value]);
 
     const filterResByNames = searchFilmByName.map(data => {
         return (

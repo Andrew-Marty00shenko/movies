@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import FiltredMovies from './FiltredMovies/FilterByYear';
+import FiltredMovies from '../../FiltredMovies/FilterByYear';
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -23,9 +23,9 @@ const FilterYear = ({ movies }) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
 
-    const handleChange = (event) => {
-        setYear(event.target.value);
-    };
+    const handleChange = useCallback(e =>
+        setYear(e.target.value), []
+    );
 
     const handleClose = () => {
         setOpen(false);
@@ -35,12 +35,15 @@ const FilterYear = ({ movies }) => {
         setOpen(true);
     };
 
-    const searchFilmByDate = movies.filter(movie => {
-        if (!year) return movie;
-        else if (movie.release_date.includes(year)) {
-            return movie;
-        }
-    })
+    const searchFilmByDate = useMemo(() => {
+        return movies.filter(movie => {
+            if (!year) return movie;
+            else if (movie.release_date.includes(year)) {
+                return movie;
+            }
+        })
+    }, [year]);
+
 
     const filterResByYear = searchFilmByDate.map(movie => {
         return (
@@ -51,7 +54,7 @@ const FilterYear = ({ movies }) => {
                 }
             </div>
         )
-    })
+    });
 
     return (
         <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", flexWrap: "wrap" }}>
@@ -69,9 +72,24 @@ const FilterYear = ({ movies }) => {
                     <MenuItem value="">
                         <em>None</em>
                     </MenuItem>
-                    {movies.slice(1, 3).map(option => {
-                        return <MenuItem key={option.id} value={option.release_date.substr(0, 4)}>{option.release_date.substr(0, 4)}</MenuItem>
-                    })}
+                    <MenuItem value="2016">
+                        <em>2016</em>
+                    </MenuItem>
+                    <MenuItem value="2017">
+                        <em>2017</em>
+                    </MenuItem>
+                    <MenuItem value="2018">
+                        <em>2018</em>
+                    </MenuItem>
+                    <MenuItem value="2019">
+                        <em>2019</em>
+                    </MenuItem>
+                    <MenuItem value="2020">
+                        <em>2020</em>
+                    </MenuItem>
+                    {/* {movies.map(option => {
+                        return <MenuItem key={option.id} value={option.release_date.substr(0, 4)}>2019</MenuItem>
+                    })} */}
                 </Select>
             </FormControl>
             {filterResByYear}

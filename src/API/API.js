@@ -1,6 +1,6 @@
 const api_key = "b06d26f077f7cb6c5417fe25767b033e";
 
-export const setCountryCode = async () => {
+export const getCountryCode = async () => {
     const res = await fetch("http://ip-api.com/json");
     const result = await res.json();
     return result.countryCode

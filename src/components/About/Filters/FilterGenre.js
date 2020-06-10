@@ -1,5 +1,5 @@
 import React from 'react';
-import FilterByGenres from './FiltredMovies/FilterByGenres';
+import FilterByGenres from '../../FiltredMovies/FilterByGenres';
 
 const FilterGenre = ({ genres, updateMovies, selectMovies }) => {
 

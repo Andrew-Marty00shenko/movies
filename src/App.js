@@ -5,7 +5,7 @@ import { Route } from 'react-router-dom';
 import Movie from '././components/Movie/Movie'
 import About from './components/About/About';
 import Axios from 'axios';
-import { setCountryCode } from './API/API';
+import { getCountryCode } from './API/API';
 
 const api_key = "b06d26f077f7cb6c5417fe25767b033e";
 
@@ -16,7 +16,7 @@ const App = () => {
   const [selectMovies, setSelectMovies] = useState([]);
 
   useEffect(() => {
-    setCountryCode().then(code => {
+    getCountryCode().then(code => {
       Axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&query=whiplash&language=${code.toLowerCase()}&region=${code}`)
         .then(res => {
           setMovies(res.data.results.slice(0, 5));
