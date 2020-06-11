@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FilterByGenres = ({ movie, genres }) => {
-    debugger
+
     const classes = useStyles();
 
     return (
@@ -49,7 +49,7 @@ const FilterByGenres = ({ movie, genres }) => {
                         <CardHeader
                             title={movie ? movie.title : null}
                             style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}
-                            subheader={movie ? movie.release_date.substr(0, 4) : null}
+                            subheader={movie ? movie.release_date : null}
                         />
                         <CardMedia
                             className={classes.media}

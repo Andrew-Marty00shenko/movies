@@ -49,7 +49,7 @@ const FilterYear = ({ movies }) => {
                     <Slider
                         value={year}
                         onChange={handleChange}
-                        min={2015}
+                        min={2010}
                         max={2020}
                         aria-labelledby="discrete-slider"
                         valueLabelDisplay="auto"

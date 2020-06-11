@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useCallback } from 'react'
 import TextField from '@material-ui/core/TextField';
 import FiltredMovies from '../../FiltredMovies/FilterByNames';
 
@@ -14,6 +14,10 @@ const FilterName = ({ movies }) => {
             }
         })
     }, [value]);
+
+    const handleChange = useCallback(e =>
+        setValue(e.target.value), []
+    );
 
     const filterResByNames = searchFilmByName.map(data => {
         return (
@@ -32,7 +36,7 @@ const FilterName = ({ movies }) => {
                 label="Search for a film"
                 margin="normal"
                 value={value}
-                onChange={(e) => setValue(e.target.value)}
+                onChange={handleChange}
                 variant="outlined"
             /> <br />
             <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap" }}>

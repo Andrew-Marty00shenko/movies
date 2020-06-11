@@ -2,9 +2,9 @@ import React from 'react'
 import './About.scss'
 import FilterName from './Filters/FilterName';
 import FilterYear from './Filters/FilterYear';
-import FilterGenre from './Filters/FilterGenre';
+import FilterGenreAndYear from './Filters/FilterGenreAndYear';
 
-const About = ({ selectMovies, moviesForFilt, genres, updateMovies }) => {
+const About = ({ selectMovies, moviesForFilt, genres, genresNames, yearFromFilter, yearFrom }) => {
 
     return (
         <div className="about">
@@ -16,7 +16,7 @@ const About = ({ selectMovies, moviesForFilt, genres, updateMovies }) => {
                 <FilterName movies={moviesForFilt} />
                 <FilterYear movies={moviesForFilt} />
             </div>
-            <FilterGenre selectMovies={selectMovies} genres={genres} updateMovies={updateMovies} />
+            <FilterGenreAndYear yearFromFilter={yearFromFilter} selectMovies={selectMovies} yearFrom={yearFrom} genres={genres} genresNames={genresNames} />
         </div>
     )
 }
