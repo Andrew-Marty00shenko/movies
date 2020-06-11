@@ -16,7 +16,6 @@ const App = () => {
   const [moviesForFilt, setMoviesForFilt] = useState([]);
   const [selectMovies, setSelectMovies] = useState([]);
   const [yearFrom, setYearFrom] = useState("");
-  const [yearTo, setYearTo] = useState("");
   const [selectedGenres, setSelectedGenres] = useState([])
 
   useEffect(() => {
@@ -36,22 +35,23 @@ const App = () => {
       })
   }, []);
 
-  const genresNames = (e) => {
+  const genresNames = useCallback(e => {
     if (e.target.checked) {
-      const newState = moviesForFilt.filter(movie => movie.genre_ids.includes(parseInt(e.target.name)));
-      setSelectedGenres(newState);
+      setSelectedGenres(moviesForFilt.filter(movie => movie.genre_ids.include(e.target.name)));
       updateMovies(selectedGenres);
     }
-  }
+  }, [selectedGenres]);
+
   const yearFromFilter = useCallback((event) => {
     setYearFrom(event.target.value);
   }, []);
 
-  const updateMovies = (genresNames, yearFrom) => {
+  const updateMovies = (genresNames, yearFrom, yearTo) => {
     debugger
     Axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&language=ru-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genresNames}`)
       .then(res => {
         setSelectMovies(res.data.results);
+        console.log(res.data)
       })
   }
 
