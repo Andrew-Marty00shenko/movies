@@ -1,13 +1,13 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom'
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
-import { makeStyles } from '@material-ui/core/styles';
-import { red } from '@material-ui/core/colors';
 import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography';
-import PropTypes from 'prop-types';
+import { red } from '@material-ui/core/colors';
+import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -37,44 +37,36 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const FilterByGenres = ({ movie, genres }) => {
-
+const FiltredMovies = ({ movies }) => {
     const classes = useStyles();
 
     return (
-        <ul style={{ marginLeft: "10px" }}>
-            <li >
-                <NavLink to={`movies/${movie.id}`} >
+        <div className="movies" style={{ marginLeft: "20px" }}>
+            <h2 style={{ marginLeft: "10px" }}>Results</h2>
+            {movies.map(item => {
+                return <NavLink to={`movies/${item.id}`} key={item.id}>
                     <Card style={{ cursor: "pointer" }} className={classes.root}>
                         <CardHeader
-                            title={movie ? movie.title : null}
+                            title={item ? item.title : null}
                             style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}
-                            subheader={movie ? movie.release_date : null}
+                            subheader={item ? item.release_date.substr(0, 4) : null}
                         />
                         <CardMedia
                             className={classes.media}
-                            image={`https://image.tmdb.org/t/p/w220_and_h330_face/${movie ? movie.poster_path : null}`}
-                            title={movie ? movie.title : null}
+                            image={`https://image.tmdb.org/t/p/w220_and_h330_face/${item ? item.poster_path : null}`}
+                            title={item ? item.title : null}
                         />
                         <CardContent>
-                            <Typography variant="body2" color="textSecondary" component="p" style={{ display: "flex", flexWrap: "wrap" }}>
-                                <span style={{ color: "gold" }} >Жанр: </span>{genres.map(genre => (
-                                    <li key={genre}>{genre},</li>
-                                ))}
-                            </Typography>
                             <Typography variant="body2" color="textSecondary" component="p">
-                                <span style={{ color: "gold" }}>Оценка:</span>  {movie ? movie.vote_average : null}
+                                <span style={{ color: "gold" }}>Оценка:</span>  {item ? item.vote_average : null}
                             </Typography>
+                            <Button variant="contained" color="primary" style={{ fontSize: "13px" }} className={classes.btn}>Read more</Button>
                         </CardContent>
                     </Card>
                 </NavLink>
-            </li>
-        </ul>
+            })}
+        </div>
     )
 }
 
-FilterByGenres.propTypes = {
-    movie: PropTypes.object.isRequired
-};
-
-export default FilterByGenres
+export default FiltredMovies;

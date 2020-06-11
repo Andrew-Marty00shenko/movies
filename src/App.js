@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from './components/Header/Header';
 import MoviesList from './components/MoviesList/MoviesList';
 import { Route } from 'react-router-dom';
@@ -13,10 +13,6 @@ const App = () => {
 
   const [movies, setMovies] = useState([]);
   const [genres, setGenres] = useState([]);
-  const [moviesForFilt, setMoviesForFilt] = useState([]);
-  const [selectMovies, setSelectMovies] = useState([]);
-  const [yearFrom, setYearFrom] = useState("");
-  const [selectedGenres, setSelectedGenres] = useState([])
 
   useEffect(() => {
     getCountryCode().then(code => {
@@ -29,36 +25,12 @@ const App = () => {
       .then(res => {
         setGenres(res.data.genres);
       })
-    Axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&language=ru-US&sort_by=popularity.desc&include_adult=false&include_video=false`)
-      .then(res => {
-        setMoviesForFilt(res.data.results);
-      })
   }, []);
-
-  const genresNames = useCallback(e => {
-    if (e.target.checked) {
-      setSelectedGenres(moviesForFilt.filter(movie => movie.genre_ids.include(e.target.name)));
-      updateMovies(selectedGenres);
-    }
-  }, [selectedGenres]);
-
-  const yearFromFilter = useCallback((event) => {
-    setYearFrom(event.target.value);
-  }, []);
-
-  const updateMovies = (genresNames, yearFrom, yearTo) => {
-    debugger
-    Axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&language=ru-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genresNames}`)
-      .then(res => {
-        setSelectMovies(res.data.results);
-        console.log(res.data)
-      })
-  }
 
   return (
     <div className="app-wrapper">
       <Header />
-      <About selectMovies={selectMovies} yearFromFilter={yearFromFilter} yearFrom={yearFrom} moviesForFilt={moviesForFilt} genres={genres} genresNames={genresNames} />
+      <About genres={genres} api_key={api_key} />
       <Route exact path="/" render={() => <MoviesList movies={movies} />} />
       <Route exact path="/movies/:movieId?" render={(props) => <Movie movieId={props.match.params.movieId} api_key={api_key} />} />
     </div>
