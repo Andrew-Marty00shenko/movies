@@ -1,17 +1,11 @@
 import React from 'react';
+import { Grid } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 
-const FilterGenre = ({ genres, handleChange }) => {
-    // const getGenres = (genreIds, genres) => {
-    //     return genreIds.map(genreId => {
-    //         const filteredGenres = genres.find(genre => genre.id === genreId);
-    //         if (genres === undefined || genres.length === 0) {
-    //             return false;
-    //         }
-    //         return filteredGenres.name;
-    //     })
-    // };
+const FilterGenre = ({ genres, handleChangeYearFrom, handleChangeYearTo, valueTo, valueFrom, handleChangeGenres }) => {
     return (
         <ul>
+
             <div style={{ display: "flex" }}>
                 <div>
                     {genres.map(genre => {
@@ -19,12 +13,32 @@ const FilterGenre = ({ genres, handleChange }) => {
                             <input
                                 type="checkbox"
                                 name={genre.id}
-                                onChange={handleChange}
+                                onChange={handleChangeGenres}
                             />
                             {genre.name}
                         </li>
                     })}
                 </div>
+                <Grid item xs >
+                    <TextField
+                        label="From"
+                        margin="normal"
+                        placeholder="2010-05-10"
+                        style={{ width: 150 }}
+                        value={valueFrom}
+                        onChange={handleChangeYearFrom}
+                        variant="outlined"
+                    />
+                    <TextField
+                        label="To"
+                        style={{ width: 150 }}
+                        placeholder="2020-05-10"
+                        margin="normal"
+                        value={valueTo}
+                        onChange={handleChangeYearTo}
+                        variant="outlined"
+                    />
+                </Grid>
             </div>
         </ul>
     )

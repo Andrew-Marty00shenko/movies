@@ -6,11 +6,11 @@ import Movie from '././components/Movie/Movie'
 import About from './components/About/About';
 import Axios from 'axios';
 import { getCountryCode } from './API/API';
+import Recomended from './components/RecomendedMovies/Recomended';
 
 const api_key = "b06d26f077f7cb6c5417fe25767b033e";
 
 const App = () => {
-
   const [movies, setMovies] = useState([]);
   const [genres, setGenres] = useState([]);
 
@@ -19,20 +19,21 @@ const App = () => {
       Axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&query=whiplash&language=${code.toLowerCase()}&region=${code}`)
         .then(res => {
           setMovies(res.data.results.slice(0, 5));
-        })
+        });
+      Axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}&language=${code.toLowerCase()}`)
+        .then(res => {
+          setGenres(res.data.genres);
+        });
     });
-    Axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}&language=ru`)
-      .then(res => {
-        setGenres(res.data.genres);
-      })
   }, []);
 
   return (
     <div className="app-wrapper">
       <Header />
-      <About genres={genres} api_key={api_key} />
+      <Route exact path="/" render={() => <About genres={genres} />} />
       <Route exact path="/" render={() => <MoviesList movies={movies} />} />
-      <Route exact path="/movies/:movieId?" render={(props) => <Movie movieId={props.match.params.movieId} api_key={api_key} />} />
+      <Route path="/movies/:movieId?" render={(props) => <Movie movieId={props.match.params.movieId} api_key={api_key} />} />
+      <Route path="/recommended" render={() => <Recomended genres={genres} />} />
     </div>
   )
 }

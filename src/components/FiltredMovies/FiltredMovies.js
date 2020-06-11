@@ -12,7 +12,7 @@ import { NavLink } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
     root: {
         marginTop: 20,
-        width: 230,
+        width: 260,
     },
     media: {
         paddingTop: '56.25%',
@@ -42,7 +42,6 @@ const FiltredMovies = ({ movies }) => {
 
     return (
         <div className="movies" style={{ marginLeft: "20px" }}>
-            <h2 style={{ marginLeft: "10px" }}>Results</h2>
             {movies.map(item => {
                 return <NavLink to={`movies/${item.id}`} key={item.id}>
                     <Card style={{ cursor: "pointer" }} className={classes.root}>

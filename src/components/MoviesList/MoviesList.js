@@ -13,7 +13,7 @@ import { NavLink } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
     root: {
         marginTop: 20,
-        width: 230,
+        width: 280,
     },
     media: {
         paddingTop: '56.25%',
@@ -43,7 +43,7 @@ const MoviesList = ({ movies }) => {
     const classes = useStyles();
 
     return (
-        <>
+        <div className="mov">
             <h2 style={{ marginLeft: "10px" }}>What's popular</h2>
             <div className="movies" style={{ marginLeft: "20px" }}>
                 {movies.map(item => {
@@ -69,7 +69,7 @@ const MoviesList = ({ movies }) => {
                     </NavLink>
                 })}
             </div>
-        </>
+        </div>
     );
 }
 

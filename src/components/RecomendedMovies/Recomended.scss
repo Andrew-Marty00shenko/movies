@@ -1,0 +1,22 @@
+.recommended{
+    background: linear-gradient(to right, rgba(rgb(0, 64, 113), 0.8) 0%, rgba(rgb(0, 0, 121), 0) 100%);
+    padding: 30px;
+
+    &-title{
+        color: #fff;
+        font-size: 30px;
+        font-family: 'Tenali Ramakrishna', sans-serif;
+        line-height: 50px;
+        font-weight: bold;
+    }
+
+    &-search{
+        h2{
+            color: #fff;
+            font-size: 32px;
+            font-family: 'Tenali Ramakrishna', sans-serif;
+            line-height: 50px;
+            font-weight: bold;
+        }
+    }
+}

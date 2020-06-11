@@ -3,6 +3,7 @@ import './Movie.scss'
 import Rating from '../Rating/Rating'
 import { Button } from '@material-ui/core'
 import Axios from 'axios'
+import { getCountryCode } from '../../API/API'
 
 // const api_key = "b06d26f077f7cb6c5417fe25767b033e";
 
@@ -12,11 +13,13 @@ const Movie = ({ api_key, movieId }) => {
     const [currentMovie, setCurrentMovie] = useState({});
 
     useEffect(() => {
-        Axios.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}&language=ru`)
-            .then(res => {
-                setCurrentMovie(res.data);
-            })
-    }, []);
+        getCountryCode().then(code => {
+            Axios.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}&language=ru`)
+                .then(res => {
+                    setCurrentMovie(res.data);
+                })
+        })
+    }, [movieId, api_key]);
 
     const popUp = () => {
         setShowBox(!showBox);

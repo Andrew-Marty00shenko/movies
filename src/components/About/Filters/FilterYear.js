@@ -1,40 +1,29 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import { TextField } from '@material-ui/core';
+import Slider from '@material-ui/core/Slider';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: 100,
-        marginLeft: 20
+        width: 200,
+        marginLeft: 20,
+        marginTop: 20
     },
 }));
 
-const FilterYear = ({ value, handleChange, valueTo, handleChangeTo }) => {
+const FilterYear = ({ value, handleChange }) => {
     const classes = useStyles();
 
     return (
         <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", flexWrap: "wrap" }}>
             < div className={classes.root} >
-                <Grid item xs style={{ marginTop: 20 }}>
-                    Choose dates
-                    <TextField
-                        label="From"
-                        margin="normal"
-                        style={{ width: 150 }}
-                        value={value}
-                        onChange={handleChange}
-                        variant="outlined"
-                    />
-                    <TextField
-                        label="To"
-                        style={{ width: 150 }}
-                        margin="normal"
-                        value={valueTo}
-                        onChange={handleChangeTo}
-                        variant="outlined"
-                    />
-                </Grid>
+                Select year
+                <Slider
+                    value={value}
+                    aria-labelledby="discrete-slider"
+                    valueLabelDisplay="auto"
+                    max={2020}
+                    min={1800}
+                    onChange={handleChange} />
             </ div>
         </div >
     )

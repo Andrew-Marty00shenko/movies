@@ -10,6 +10,7 @@ export default function CustomizedRatings({ api_key, movieId }) {
 
     const [value, setValue] = useState(null);
     const [load, setLoad] = useState(false);
+    const [send, setSend] = useState(true);
 
     const handleChange = e => {
         setValue(e.target.value);
@@ -24,7 +25,8 @@ export default function CustomizedRatings({ api_key, movieId }) {
                     'Content-Type': 'application/json;charset=utf-8'
                 }
             }).then(res => {
-                setLoad(false)
+                setLoad(false);
+                setTimeout(() => setSend(false), 500);
             })
         })
     }
@@ -41,14 +43,19 @@ export default function CustomizedRatings({ api_key, movieId }) {
                         max={10}
                         precision={0.5}
                         emptyIcon={<StarBorderIcon fontSize="inherit" />}
-                    /> <br />
-                    <Button type="submit"
-                        variant="contained"
-                        color="primary"
-                        disabled={load}
-                        style={{ fontSize: "10px", height: "30px" }}
-                    >{load ? "...Отправка" : "Отправить"}
-                    </Button>
+                    />
+                    <br />
+                    {send ?
+                        <Button type="submit"
+                            variant="contained"
+                            color="primary"
+                            disabled={load}
+                            style={{ fontSize: "10px", height: "30px" }}
+                        >{load ? "...Отправка" : "Отправить"}
+                        </Button>
+                        :
+                        <p>Ваш отзыв отправлен</p>
+                    }
                 </form>
             </Box>
         </div>
