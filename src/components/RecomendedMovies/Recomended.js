@@ -32,7 +32,7 @@ const Recomended = ({ genres }) => {
 
     const getSelectedMovies = useCallback(({ genre, yearFrom, yearTo }) => {
         getCountryCode().then(code => {
-            Axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&language=${code.toLowerCase()}-${code}&page=1&with_genres=${genre}&primary_release_date.gte=${yearFrom}&primary_release_date.lte=${yearTo}`)
+            Axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&language=ru-${code}&page=1&with_genres=${genre}&primary_release_date.gte=${yearFrom}&primary_release_date.lte=${yearTo}`)
                 .then(res => {
                     setSelectedMovies(res.data.results.slice(0, 1));
                 });

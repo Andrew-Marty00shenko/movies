@@ -23,7 +23,7 @@ const About = () => {
 
     const getSelectedMovies = useCallback(({ name, year }) => {
         getCountryCode().then(code => {
-            Axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&language=${code.toLowerCase()}-${code}&page=1&year=${year}`)
+            Axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&language=ru-${code}&page=1&year=${year}`)
                 .then(res => {
                     setSelectedMovies(res.data.results.filter(movie => movie.title.toLowerCase().includes(name.toLowerCase())))
                 })
